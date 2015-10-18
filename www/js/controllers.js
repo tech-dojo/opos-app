@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', ['$scope','$http', 'Authentication',function($scope, $http, Authentication ) {
+.controller('DashCtrl', ['$scope','$http','$location', 'Authentication',function($scope, $http,$location, Authentication ) {
 
     $scope.authentication = Authentication;
 
@@ -12,12 +12,14 @@ angular.module('starter.controllers', [])
     $scope.signin = function() {
 
       console.log($scope.credentials);
-      $http.post('https://opos.tech-dojo.org/auth/signin', $scope.credentials).success(function(response) {
+      $http.post('http://opos.tech-dojo.org/auth/signin', $scope.credentials).success(function(response) {
         // If successful we assign the response to the global user model
         $scope.authentication.user = response;
 console.log('success');
         // And redirect to the index page
-        $location.path('#/tab/chats');
+        $location.path('/view');
+
+
       }).error(function(response) {
         $scope.error = response.message;
       });
@@ -27,7 +29,7 @@ console.log('success');
   }
 ])
 
-.controller('ChatsCtrl', function($scope, Chats) {
+.controller('ChatsCtrl', function($scope, Chats , Authentication) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -35,6 +37,9 @@ console.log('success');
   //
   //$scope.$on('$ionicView.enter', function(e) {
   //});
+
+    $scope.authentication = Authentication;
+
 
   $scope.chats = Chats.all();
   $scope.remove = function(chat) {

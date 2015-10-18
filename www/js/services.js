@@ -1,5 +1,19 @@
 angular.module('starter.services', [])
 
+  .factory('Authentication', [
+    function() {
+      var _this = this;
+
+      _this._data = {
+        user: window.user
+      };
+
+      return _this._data;
+    }
+  ])
+  
+
+
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
 

@@ -40,6 +40,21 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         controller: 'DashCtrl'
 
   })
+      .state('view', {
+      url: '/view',
+
+      templateUrl: 'templates/initial-page.html',
+      controller: 'DashCtrl'
+    
+    })
+
+      .state('order', {
+      url: '/order',
+
+      templateUrl: 'templates/order-list.html',
+      controller: 'OrderCtrl'
+
+    })
 
     .state('report', {
       url: '/report',
@@ -49,13 +64,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
     })
 
-
-    .state('view', {
-      url: '/view',
-
-          templateUrl: 'templates/initial-page.html',
-      controller: 'DashCtrl'
-             })
     .state('tab.chat-detail', {
       url: '/chats/:chatId',
       views: {

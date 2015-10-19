@@ -29,6 +29,32 @@ console.log('success');
   }
 ])
 
+//--------------------------Order Create Controller Starts--------------------//
+
+.controller('OrderCtrl', function($scope , $http, Authentication) {
+  // With the new view caching in Ionic, Controllers are only called
+  // when they are recreated or on app start, instead of every page change.
+  // To listen for when this page is active (for example, to refresh data),
+  // listen for the $ionicView.enter event:
+  //
+  //$scope.$on('$ionicView.enter', function(e) {
+  //});
+
+     $scope.authentication = Authentication;
+     console.log('Hello');
+           $http.get('http://opos.tech-dojo.org/orders').success(function(data) {
+$scope.orders  = data;
+            console.log(data);
+
+    //     // If successful we assign the response to the global user model
+    //     $scope.authentication.user = response;
+    //     console.log('success');
+    //     // And redirect to the index page
+         //$location.path('/orders');
+         })
+    })
+//--------------------------Order Create Controller Ends--------------------//
+
 .controller('ChatsCtrl', function($scope, Chats , Authentication) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.

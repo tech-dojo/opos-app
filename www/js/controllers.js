@@ -1,6 +1,7 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', ['$scope','$http','$location', 'Authentication',function($scope, $http,$location, Authentication ) {
+.controller('DashCtrl', ['$scope','$http','$location', 'Authentication',
+    function($scope, $http,$location, Authentication ) {
 
     $scope.authentication = Authentication;
 
@@ -17,13 +18,114 @@ angular.module('starter.controllers', [])
         $scope.authentication.user = response;
 console.log('success');
         // And redirect to the index page
-        $location.path('/view');
+        $location.path('/report');
 
 
       }).error(function(response) {
         $scope.error = response.message;
       });
     };
+
+      $scope.start = new Date();
+      $scope.end = new Date();
+      $scope.startReportDate = {
+
+        titleLabel: 'Title',  //Optional
+        todayLabel: 'Today',  //Optional
+        closeLabel: 'Close',  //Optional
+        setLabel: 'Set',  //Optional
+        setButtonType : 'button-assertive',  //Optional
+        todayButtonType : 'button-assertive',  //Optional
+        closeButtonType : 'button-assertive',  //Optional
+      inputDate: $scope.start,    //Optional
+        mondayFirst: true,    //Optional
+
+        templateType: 'popup', //Optional
+        showTodayButton: 'true', //Optional
+        modalHeaderColor: 'bar-positive', //Optional
+        modalFooterColor: 'bar-positive',
+        callback: function (val) {    //Mandatory
+          startReportDateCallback(val);
+        }
+      };
+
+
+      $scope.endReportDate = {
+
+        titleLabel: 'Title',  //Optional
+        todayLabel: 'Today',  //Optional
+        closeLabel: 'Close',  //Optional
+        setLabel: 'Set',  //Optional
+        setButtonType : 'button-assertive',  //Optional
+        todayButtonType : 'button-assertive',  //Optional
+        closeButtonType : 'button-assertive',  //Optional
+       inputDate: $scope.end,    //Optional
+        mondayFirst: true,    //Optional
+
+        templateType: 'popup', //Optional
+        showTodayButton: 'true', //Optional
+        modalHeaderColor: 'bar-positive', //Optional
+        modalFooterColor: 'bar-positive',
+        callback: function (val) {    //Mandatory
+          endReportDateCallback(val);
+        }
+      };
+
+
+      var startReportDateCallback = function (val) {
+        if (typeof(val) === 'undefined') {
+          console.log('No date selected');
+        } else {
+          $scope.start  = val;
+          console.log('Selected date is : ', val)
+        }
+      };
+      var endReportDateCallback = function (val) {
+        if (typeof(val) === 'undefined') {
+          console.log('No date selected');
+        } else {
+          $scope.end = val;
+          console.log('Selected date is : ', val)
+        }
+      };
+
+    $scope.generateReport = function() {
+
+      console.log( $scope.startReportDate );
+      console.log($scope.endReportDate );
+
+      $http({
+        method: 'GET',
+        url: 'http://opos.tech-dojo.org/getOrdersFromDate?0='+$scope.start+'&1='+ $scope.end
+
+      }).success(function(data) {
+
+
+        console.log(data);
+        //var totalQuanity, totalPrice;
+        var totalQuanity= 0,  totalPrice=0;
+        //   console.log(data);
+        for (var i=0; i<data.length; i++){
+          // console.log(data.price);
+          totalPrice= totalPrice+ data[i].price;
+          totalQuanity= totalQuanity+ data[i].quantity;
+
+        }
+        $scope.reportData = data;
+
+        $scope.reportTotalPrice = totalPrice;
+        $scope.reportTotalQuanity=totalQuanity;
+
+
+      }).error(function(response) {
+        // Show user error message and clear form
+
+        $scope.error = response.message;
+        $scope.contact = '';
+
+      });
+    };
+
 
 
   }

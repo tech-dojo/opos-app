@@ -12,13 +12,13 @@ angular.module('starter.controllers', [])
 
     $scope.signin = function() {
 
-      console.log("inside sign in " +$scope.credentials);
+      console.log($scope.credentials);
       $http.post('http://opos.tech-dojo.org/auth/signin', $scope.credentials).success(function(response) {
         // If successful we assign the response to the global user model
         $scope.authentication.user = response;
         console.log('success');
         // And redirect to the index page
-        //$location.path('/view');
+        $location.path('/view');
         $scope.success= true;
 
       }).error(function(response) {
@@ -80,7 +80,7 @@ angular.module('starter.controllers', [])
           console.log('No date selected');
         } else {
           $scope.start  = val;
-          console.log('Selected date is : ', val)
+          console.log(val)
         }
       };
       var endReportDateCallback = function (val) {
@@ -88,13 +88,14 @@ angular.module('starter.controllers', [])
           console.log('No date selected');
         } else {
           $scope.end = val;
-          console.log('Selected date is : ', val)
+          console.log(val)
         }
       };
 
     $scope.generateReport = function() {
-
-      console.log( $scope.startReportDate );
+ //$scope.start= new Date("Sat Oct 03 2015 00:00:00"); *needed for testing to pass*
+ //$scope.end = new Date("Sat Oct 13 2015 00:00:00");  *needed for testing to pass*
+      console.log($scope.startReportDate );
       console.log($scope.endReportDate );
 
       $http({
@@ -104,7 +105,7 @@ angular.module('starter.controllers', [])
       }).success(function(data) {
 
 
-        console.log(data);
+        console.log("checking "+data);
         //var totalQuanity, totalPrice;
         var totalQuanity= 0,  totalPrice=0;
         //   console.log(data);
@@ -114,6 +115,7 @@ angular.module('starter.controllers', [])
           totalQuanity= totalQuanity+ data[i].quantity;
 
         }
+        //console.log(data);
         $scope.reportData = data;
 
         $scope.reportTotalPrice = totalPrice;
@@ -122,7 +124,7 @@ angular.module('starter.controllers', [])
 
       }).error(function(response) {
         // Show user error message and clear form
-
+console.log("error");
         $scope.error = response.message;
         $scope.contact = '';
 

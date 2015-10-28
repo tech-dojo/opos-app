@@ -5,24 +5,27 @@ angular.module('starter.controllers', [])
 
     $scope.authentication = Authentication;
 
-    $scope.credentials ={
-      username: '',
-      password: ''
+   $scope.credentials ={
+      username: 'admin',
+      password: 'opos1234'
     };
 
     $scope.signin = function() {
 
-      console.log($scope.credentials);
+      console.log("inside sign in " +$scope.credentials);
       $http.post('http://opos.tech-dojo.org/auth/signin', $scope.credentials).success(function(response) {
         // If successful we assign the response to the global user model
         $scope.authentication.user = response;
-console.log('success');
+        console.log('success');
         // And redirect to the index page
-        $location.path('/report');
-
+        //$location.path('/view');
+        $scope.success= true;
 
       }).error(function(response) {
         $scope.error = response.message;
+        console.log("fgfgfgfgfg");
+      $scope.success= false;        
+
       });
     };
 

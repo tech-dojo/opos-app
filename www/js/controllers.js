@@ -157,10 +157,11 @@ console.log('inside');
   //});
 
      $scope.authentication = Authentication;
-     console.log('Hello');
-           $http.get('http://opos.tech-dojo.org/orders').success(function(data) {
-$scope.orders  = data;
-            console.log(data);
+  //   console.log('Hello This Order Controller');
+     $http.get('http://opos.tech-dojo.org/orders').success(function(data) {
+     $scope.orders  = data;
+     
+    // console.log(data);
 
     //     // If successful we assign the response to the global user model
     //     $scope.authentication.user = response;

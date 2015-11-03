@@ -19,7 +19,7 @@ describe('ControllersLogIn', function() {
     }));
 
     // tests start here
-    it('signin function has been called and is a success', function() {
+    it('$scope.signin() should work with correct data', function() {
 
         $httpBackend.expectPOST('http://opos.tech-dojo.org/auth/signin').respond(200, 'Fred'); //Fake
         scope.signin();
@@ -30,8 +30,38 @@ describe('ControllersLogIn', function() {
 
     });
 
+    it('$scope.signin() should fail to log in with nothing', function() {
+            // Test expected POST request
+            $httpBackend.expectPOST('http://opos.tech-dojo.org/auth/signin').respond(400, {
+                'message': 'Missing credentials'
+            });
 
-    it('generateReport function has been called and has returned data', function() {
+            scope.signin();
+            $httpBackend.flush();
+
+            // Test scope value
+            expect(scope.error).toEqual('Missing credentials');
+        });
+
+        it('$scope.signin() should fail to log in with wrong credentials', function() {
+            // Foo/Bar combo assumed to not exist
+            scope.authentication.user = 'Foo';
+            scope.credentials = 'Bar';
+
+            // Test expected POST request
+            $httpBackend.expectPOST('http://opos.tech-dojo.org/auth/signin').respond(400, {
+                'message': 'Unknown user'
+            });
+
+            scope.signin();
+            $httpBackend.flush();
+
+            // Test scope value
+            expect(scope.error).toEqual('Unknown user');
+        });
+
+
+    it('generateReport function has been called and has returned data successfully', function() {
 
 
         var report = [{
@@ -66,10 +96,14 @@ describe('ControllersLogIn', function() {
        // console.log("endtime : " +endTime);
      //   endTime = JSON.stringify(endTime);
         console.log(startTime);
-
         console.log(endTime);
 
-        $httpBackend.expectGET('http://opos.tech-dojo.org/getOrdersFromDate?0=' + startTime + '&1=' +endTime).respond(200, report); //Fake
+scope.start = startTime;
+scope.end = endTime;
+
+
+        $httpBackend.expectGET('http://opos.tech-dojo.org/getOrdersFromDate?0=' 
+        + scope.start + '&1=' +scope.end).respond(200, report); //Fake
 
      scope.generateReport();
 
@@ -82,6 +116,37 @@ var price = scope.reportData[4].price;
          expect(price).toEqual(2200);
 
     });
+
+ it('Show error message if the date range is wrong', function() {
+
+        var startTime = new Date("Sat Oct 13 2015 00:00:00");
+
+      //  startTime = JSON.stringify(startTime);
+        console.log("starttime : " + startTime);
+
+
+        var endTime = new Date("Sat Oct 03 2015 00:00:00");
+       // console.log("endtime : " +endTime);
+     //   endTime = JSON.stringify(endTime);
+        console.log(startTime);
+
+        console.log(endTime);
+
+        scope.start = startTime; 
+        scope.end = endTime;
+
+        // $httpBackend.expectGET('http://opos.tech-dojo.org/getOrdersFromDate?0=' 
+        // + startTime + '&1=' +endTime).respond(400, report); //Fake
+
+     scope.generateReport();
+     
+ var wrongDateRangeErrorMessage = 'incorrect date range';
+        
+
+         expect(scope.wrongDateRange).toEqual(wrongDateRangeErrorMessage);
+
+    });
+
 
 
 });

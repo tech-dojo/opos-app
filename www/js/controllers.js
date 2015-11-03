@@ -93,10 +93,17 @@ angular.module('starter.controllers', [])
       };
 
     $scope.generateReport = function() {
- //$scope.start= new Date("Sat Oct 03 2015 00:00:00"); *needed for testing to pass*
- //$scope.end = new Date("Sat Oct 13 2015 00:00:00");  *needed for testing to pass*
+ 
       console.log($scope.startReportDate );
       console.log($scope.endReportDate );
+
+       if($scope.start>$scope.end){
+
+console.log('inside');
+      $scope.wrongDateRange = 'incorrect date range';
+
+       }
+      else{
 
       $http({
         method: 'GET',
@@ -124,11 +131,13 @@ angular.module('starter.controllers', [])
 
       }).error(function(response) {
         // Show user error message and clear form
-console.log("error");
+        console.log("error");
         $scope.error = response.message;
         $scope.contact = '';
 
       });
+      }
+
     };
 
 

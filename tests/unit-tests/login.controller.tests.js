@@ -3,9 +3,9 @@
 //     var controller, 
 //         deferredLogin,
 //         dinnerServiceMock,
-//         stateMock,
 //         ionicPopupMock;
 
+//         stateMock,
 //     // load the module for our app
 //     beforeEach(module('app'));
     

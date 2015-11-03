@@ -27,9 +27,12 @@
 
       </div>
 
-      <button ng-disabled="!credentials.username||!credentials.password" class="button button-full button-positive" type="submit">
-        Sign In
+      <button id="login" ng-disabled="!credentials.username||!credentials.password" class="button button-full button-positive" type="submit">Sign In
       </button>
+
+      <div data-ng-show="error" class="text-center text-danger">
+          <strong id="validation" data-ng-bind="error" class="ng-binding">Unknown user or invalid password</strong>
+        </div>
 
     </form>
   </ion-content>

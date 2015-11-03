@@ -6,8 +6,8 @@ angular.module('starter.controllers', [])
     $scope.authentication = Authentication;
 
    $scope.credentials ={
-      username: 'admin',
-      password: 'opos1234'
+      username: '',
+      password: ''
     };
 
     $scope.signin = function() {
@@ -31,6 +31,7 @@ angular.module('starter.controllers', [])
 
       $scope.start = new Date();
       $scope.end = new Date();
+      
       $scope.startReportDate = {
 
         titleLabel: 'Title',  //Optional

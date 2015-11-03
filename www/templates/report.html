@@ -4,18 +4,18 @@
     <label class="item item-input">
       <span class="input-label">Date</span>
       <ionic-datepicker input-obj="startReportDate">
-        <button class="button button-block button-positive"> {{start | date:'dd - MMMM - yyyy'}}</button>
+        <button id="startDate" class="button button-block button-positive"> {{start | date:'dd - MMMM - yyyy'}}</button>
       </ionic-datepicker>
     </label>
     <h1>To</h1>
     <label class="item item-input">
       <span class="input-label">Date</span>
       <ionic-datepicker input-obj="endReportDate">
-        <button class="button button-block button-positive"> {{end| date:'dd - MMMM - yyyy'}}</button>
+        <button id="endDate" class="button button-block button-positive"> {{end| date:'dd - MMMM - yyyy'}}</button>
       </ionic-datepicker>
     </label>
     <br>
-    <button class="button button-balanced" ng-click="generateReport()">Show Report</button>
+    <button id="showReportBtn" class="button button-balanced" ng-click="generateReport()">Show Report</button>
     <br>
     <hr>
     <div class="item item-text-wrap" ng-show="reportTotalPrice>0">

@@ -47,7 +47,13 @@ angular.module('starter', ['ionic','ionic-datepicker', 'starter.controllers', 's
       controller: 'DashCtrl'
     
     })
+      .state('singleorder', {
+      url: '/orders/:orderId',
 
+      templateUrl: 'templates/single-order.html',
+      controller: 'OrderCtrl'
+
+    })
       .state('order', {
       url: '/order',
 
@@ -55,6 +61,7 @@ angular.module('starter', ['ionic','ionic-datepicker', 'starter.controllers', 's
       controller: 'OrderCtrl'
 
     })
+
 
     .state('report', {
       url: '/report',

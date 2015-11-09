@@ -1,28 +1,22 @@
-<ion-view view-title="Order List"  data-ng-show="authentication.user" >
-  <ion-content>
-
-<div class="bar bar-header bar-dark">
-  <h1 class="title">Orders</h1>
-</div> 
-</br>
-<div style="margin-Left:10px; width: 98%;">  
-      <label class="item item-input" style="margin-top: 2em;">            
-          <input type="text" ng-model="query" placeholder="Search">
-          <button ng-click="search()" type="button" class="button button-positive"><i class="ion-search"></i></button>
-      </label>
-</div>
-
-<div class="list card" style="padding: 1em;">
-
-        <a  data-ng-repeat="order in orders | filter : query | orderBy:'-status'" data-ng-href="#/orders/receipt/{{order._id}}" class="item">
-        <p data-ng-bind="order.created | date:'medium'"></p>
-        <h2 id="name" >Customer Name: {{order.customerInfo.customerName}}</h2></br>
-
-                <h3 data-ng-bind="'Order Status: ' + order.status"></h4>
-                <h3 class="pull-right" data-ng-bind="'Grand Total: '+ order.totalPrice + ' TK.'"></h4>      
-        </a>
-    </div>
-  
-  
-  </ion-content>
+<ion-view view-title="Order List" data-ng-show="authentication.user" data-ng-init="getOrderList()">
+    <ion-content>
+        <div class="bar bar-header bar-dark">
+            <h1 class="title">Orders</h1>
+        </div>
+        </br>
+        <div style="margin-Left:10px; width: 98%;">
+            <label class="item item-input" style="margin-top: 2em;">
+                <input type="text" ng-model="query" placeholder="Search">
+                <button ng-click="search()" type="button" class="button button-positive"><i class="ion-search"></i></button>
+            </label>
+        </div>
+        <div class="list card" style="padding: 1em;">
+            <a data-ng-repeat="order in orders | filter : query | orderBy:'-status'" data-ng-href="#/orders/{{order._id}}" class="item">
+                <p data-ng-bind="order.created | date:'medium'"></p>
+                <h2 id="name">Customer Name: {{order.customerInfo.customerName}}</h2></br>
+                <h4 data-ng-bind="'Order Status: ' + order.status"></h4>
+                <h4 class="pull-right" data-ng-bind="'Grand Total: '+ order.totalPrice + ' TK.'"></h4>
+            </a>
+        </div>
+    </ion-content>
 </ion-view>

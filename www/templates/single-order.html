@@ -1,0 +1,38 @@
+<ion-view view-title="Single Order" data-ng-show="authentication.user" data-ng-init="getSorders(); getFoodList(); getSetMenuList()">
+    <ion-content>
+        <div class="bar bar-header bar-dark">
+            <h1 class="title">Customer Order</h1>
+        </div>
+        </br>
+        <div class="list card" style="padding: 1em; margin-top: 3em;">
+            <div class="item item-divider">
+                <h2 data-ng-bind="sorder.customerInfo.customerName"><h2>
+                <p data-ng-bind="'Contact: ' + sorder.customerInfo.customerPhone"></p>
+            </div>
+            <div ng-repeat="orderItem in sorder.orderList">
+
+                        <div ng-if="orderItem.fooditem">
+                              
+                              <div class="item item-avatar">
+                                <img ng-src="{{getfoodItemById(orderItem.fooditem).imageUrl}}"/>
+                                 <h2>{{getfoodItemById(orderItem.fooditem).title}}</h2>
+                <h4>&#2547 {{getfoodItemById(orderItem.fooditem).price}} x {{orderItem.quantity}}</h4>
+                <b>= &#2547 {{getfoodItemById(orderItem.fooditem).price*orderItem.quantity}}</b>
+            </div>
+        </div>
+        <div ng-if="orderItem.setMenu">
+            <div class="item item-avatar">
+                <img ng-src="{{getsetMenuById(orderItem.setMenu).image}}" />
+                <h2>{{getsetMenuById(orderItem.setMenu).title}}</h2>
+                <h4>&#2547 {{getsetMenuById(orderItem.setMenu).price}} x {{orderItem.quantity}}</h4>
+                <b>= &#2547 {{getsetMenuById(orderItem.setMenu).price*orderItem.quantity}}</b>
+            </div>
+        </div>
+        </div>
+        <div class="item item-divider">
+            <h3 class="pull-right" data-ng-bind="'Grand Total: '+ sorder.totalPrice + ' TK.'"></h3>
+            <p data-ng-bind="'Order Status: ' + sorder.status"></p>
+        </div>
+        </div>
+    </ion-content>
+</ion-view>

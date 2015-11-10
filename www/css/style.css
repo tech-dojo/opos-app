@@ -2,3 +2,22 @@
 .item-input{
 	padding: 0 0 0 15px;
 }
+
+.orderListSearchBox{
+margin-Left:10px; 
+width: 95%;
+}
+
+.orderListSearchBox label{
+	margin-top: 2em;
+}
+
+.initialPageTopPaddingMargin, .orderListTopPaddingMargin{
+	padding: 1em;
+	margin-top: 2em;
+}
+
+.singleOrderTopPaddingMargin{
+	padding: 1em;
+	margin-top: 3em;
+}

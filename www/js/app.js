@@ -36,15 +36,14 @@ angular.module('starter', ['ionic','ionic-datepicker', 'starter.controllers', 's
   .state('index', {
     url: '/signin',
 
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
+        templateUrl: 'templates/tab-signin.html',
+        controller: 'SignInCtrl'
 
   })
       .state('view', {
       url: '/view',
 
-      templateUrl: 'templates/initial-page.html',
-      controller: 'DashCtrl'
+      templateUrl: 'templates/initial-page.html'
     
     })
       .state('singleorder', {
@@ -67,29 +66,11 @@ angular.module('starter', ['ionic','ionic-datepicker', 'starter.controllers', 's
       url: '/report',
 
       templateUrl: 'templates/report.html',
-      controller: 'DashCtrl'
+      controller: 'ReportCtrl'
 
-    })
+    });
 
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
-        }
-      }
-    })
 
-  .state('tab.account', {
-    url: '/account',
-    views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
-      }
-    }
-  });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/signin');

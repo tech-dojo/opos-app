@@ -25,9 +25,6 @@ describe('Clicking on the login button ', function() {
         ReportButton = element(by.id('reportBtn'));
         showReportButton = element(by.id('showReportBtn'));
 
-         // startDate = element(by.id('startDate'));
-         // endDate = element(by.id('endDate'));
-
     });
 
     it('should validate the credentials for a successful login', function() {
@@ -49,8 +46,8 @@ describe('Clicking on the login button ', function() {
         // TODO: test unsuccessful login
         // browser.get('/#/view');
 
-        username.sendKeys('Aquib');
-        password.sendKeys('oposjhjkhdsfj');
+        username.sendKeys('admin');
+        password.sendKeys('IamWrongPassword');
         loginButton.click().then(function() {
         expect(browser.getLocationAbsUrl()).toMatch('/signin');
 
